@@ -9,13 +9,6 @@ __author__ = 'sexybeast'
 import requests
 import json
 import time
-from sinchsms import SinchSMS
-
-appKey = '213019d9-5c6d-4af6-b922-69f43aaf1c69'
-secret = 'QyhpnIUJz0ulSDo6ZTXLlQ=='
-
-client = SinchSMS(appKey, secret)
-
 
 def current_weather(location):
 	url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + str(location[0]) + '&lon=' + str(location[1])
@@ -41,14 +34,15 @@ def current_weather(location):
 
 
 def send_sms(message, phone_numbers):
+	email = 'aasuparboi@gmail.com'
+	sender = 'farm monitor'
+	subacct = 'LARRY'
+	passwd = 'farm'
 	for phone_number in phone_numbers:
-		response = client.send_message(phone_number, message)
+		domain = 'http://www.smslive247.com/http/index.aspx?cmd=sendquickmsg&owneremail='+email+'&subacct='+ subacct +'&subacctpwd=' + passwd +'&message='+str(message)+'&sender='+ sender +'&sendto='+ phone_number+'&msgtype=0'
+		print domain
+		response =requests.get(domain)
 		print response
-		#message_id = response['messageId']
-		#response = client.check_status(message_id)
-		#print response
-		#print response['Status']
-
 
 def numbers(file_loc):
 	data = open(file_loc, 'r')
